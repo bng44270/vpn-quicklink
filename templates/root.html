@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Junos Quick Links</title>
+</head>
+<body>
+<form method="POST" action="/addlink/">
+URL: <input type="text" name="linkurl" /><br/>
+<input type="submit" value="Add Link"/><br/><br/>
+</form>
+<form method="POST" action="/resetdomain/">
+<input type="hidden" name="fqdn" value="{{domainname}}" /><input type="submit" value="Reset FQDN" /><br/><br/>
+</form>
+<b>Saved Links:</b><br/>
+<table border="0">
+{% for thislink in linklist %}
+<tr style="border:5px;">
+<td>{{thislink['url']}}</td>
+<td style="width:30px;"></td>
+<td><form method="GET" action="https://{{domainname}}/dana/home/launch.cgi?url={{thislink['url']}}" target="_blank"><input type="submit" value="Visit"/></form></td>
+<td style="width:30px;"></td>
+<td><form method="POST" action="/dellink/"><input type="hidden" name="linkurl" value="{{thislink['url']}}" /><input type="submit" value="Delete" /></form></td>
+</tr>
+<tr style="height:10px;"><td></td></tr>
+{% endfor %}
+</table>
+</body>
+</html>
